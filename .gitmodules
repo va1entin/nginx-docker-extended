@@ -1,0 +1,3 @@
+[submodule "nginx-dav-ext-module"]
+	path = nginx-dav-ext-module
+	url = https://github.com/arut/nginx-dav-ext-module.git
