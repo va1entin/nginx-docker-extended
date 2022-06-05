@@ -1,0 +1,31 @@
+name: Build image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main  # Set a branch to deploy
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 8 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: va1entin
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3.0.0
+        with:
+          tags: va1entin/nginx-extended:latest
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: ENABLED_MODULES="nginx-dav-ext-module"
