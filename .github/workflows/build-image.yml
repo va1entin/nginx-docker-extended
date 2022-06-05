@@ -40,4 +40,3 @@ jobs:
           tags: va1entin/nginx-extended:latest
           push: true
           platforms: linux/amd64,linux/arm64
-          build-args: ENABLED_MODULES="nginx-dav-ext-module"
